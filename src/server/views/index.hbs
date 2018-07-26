@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IsoReact Example</title>
+
+    <style>
+        html, body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Roboto, 'Segoe UI', sans-serif;
+        }
+        body {
+            padding: 0 12px;
+        }
+        h2 small {
+            color: #999;
+            font-family: monospace;
+        }
+    </style>
+    {{{component1Html.head}}}
+    {{{component2Html.head}}}
+    {{{component3Html.head}}}
+</head>
+<body>
+<h1>IsoReact Example</h1>
+    <section class="section1">
+        <header>
+            <h2>Clock <small>{{component1Src}}</small></h2>
+        </header>
+        {{{component1Html.body}}}
+    </section>
+
+    <section class="section2">
+        <header>
+            <h2>Clock with random start <small>{{component2Src}}</small></h2>
+        </header>
+        {{{component2Html.body}}}
+    </section>
+
+    <section class="section2">
+        <header>
+            <h2>Component 2 <small>{{component3Src}}</small></h2>
+        </header>
+        {{{component3Html.body}}}
+    </section>
+
+    <script src="/static/client-bundle.js"></script>
+</body>
+</html>

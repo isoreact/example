@@ -14,13 +14,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/static', express.static(path.join(__dirname, '../../dist')));
 
 app.get('/', async (req, res) => {
+    const renderer = new StyledComponentsServerRenderer();
     const [component1Html, component2Html, component3Html] = await Promise.all([
-        renderToHtml(<IsoClock startFromSeconds={60} />, {serverRenderer: StyledComponentsServerRenderer}),
-        renderToHtml(<IsoClock />, {serverRenderer: StyledComponentsServerRenderer}),
-        renderToHtml(<IsoComponent2 />, {serverRenderer: StyledComponentsServerRenderer}),
+        renderToHtml(<IsoClock startFromSeconds={60} />, {render: renderer.render}),
+        renderToHtml(<IsoClock />, {render: renderer.render}),
+        renderToHtml(<IsoComponent2 />, {render: renderer.render}),
     ]);
 
     res.locals = {
+        head: renderer.sheet.getStyleTags(),
         component1Html,
         component1Src: '<IsoClock startFromSeconds={60} />',
         component2Html,

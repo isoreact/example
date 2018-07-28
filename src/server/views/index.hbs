@@ -18,9 +18,7 @@
             font-family: monospace;
         }
     </style>
-    {{{component1Html.head}}}
-    {{{component2Html.head}}}
-    {{{component3Html.head}}}
+    {{{head}}}
 </head>
 <body>
 <h1>IsoReact Example</h1>
@@ -28,21 +26,21 @@
         <header>
             <h2>Clock <small>{{component1Src}}</small></h2>
         </header>
-        {{{component1Html.body}}}
+        {{{component1Html}}}
     </section>
 
     <section class="section2">
         <header>
             <h2>Clock with random start <small>{{component2Src}}</small></h2>
         </header>
-        {{{component2Html.body}}}
+        {{{component2Html}}}
     </section>
 
     <section class="section2">
         <header>
             <h2>Component 2 <small>{{component3Src}}</small></h2>
         </header>
-        {{{component3Html.body}}}
+        {{{component3Html}}}
     </section>
 
     <script src="/static/client-bundle.js"></script>

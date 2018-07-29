@@ -1,5 +1,5 @@
 import {isomorphic} from '@isoreact/core';
-import {of as observableOf, interval, concat} from 'rxjs';
+import {of as observableOf, interval} from 'rxjs';
 import {shareReplay, map, filter, startWith} from 'rxjs/operators';
 
 import update from '../../util/update';
@@ -13,12 +13,9 @@ const IsoClock = isomorphic({
     context: ClockContext,
     getData: ({startFromSeconds}, hydration) => (
         hydration
-            ? concat(
-                observableOf(hydration.seconds),
-                update(
-                    hydration.seconds,
-                    interval(1000), (seconds) => seconds + 1,
-                )
+            ? update(
+                hydration.seconds,
+                interval(1000), (seconds) => seconds + 1,
             )
                 .pipe(
                     filter(isFinite),

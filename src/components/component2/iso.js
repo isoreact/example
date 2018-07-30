@@ -1,6 +1,6 @@
 import {isomorphic} from '@isoreact/core';
 import {of as observableOf} from 'rxjs';
-import {shareReplay, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 
 import Component2 from '.';
 import Component2Context from './context';
@@ -13,15 +13,13 @@ const IsoComponent2 = isomorphic({
         return observableOf('Just another component taking up space')
             .pipe(
                 map((message) => ({
-                    props: {
+                    state: {
                         message,
                     },
                     hydration: {},
                 })),
-                shareReplay(1),
             );
     },
-    loadingProp: 'isLoading',
 });
 
 export default IsoComponent2;

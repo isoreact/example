@@ -1,5 +1,5 @@
 import {Observable, Subscription, of as observableOf, concat} from 'rxjs';
-import {shareReplay} from 'rxjs/operators';
+import {publishReplay, refCount} from 'rxjs/operators';
 
 // Similar to Bacon.update, but only deals with one observable at a time
 const update = (initialValue, ...patterns) => (
@@ -21,7 +21,10 @@ const update = (initialValue, ...patterns) => (
             return () => subscription.unsubscribe();
         })
     )
-        .pipe(shareReplay(1))
+        .pipe(
+            publishReplay(1),
+            refCount(),
+        )
 );
 
 export default update;

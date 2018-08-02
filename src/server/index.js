@@ -36,6 +36,7 @@ app.get('/', async (req, res) => {
         isoClock2Src: '<IsoClock />',
         isoClockNowHtml,
         isoClockNowSrc: '<IsoClockNow />',
+        isoClockNowBrowserOnlySrc: '<IsoClockNow />',
         isoComponent2Html,
         isoComponent2Src: '<IsoComponent2 />',
     };
@@ -52,7 +53,7 @@ app.get('/api/v1/time', (req, res) => {
             minutes: now.getMinutes(),
             seconds: now.getSeconds(),
         });
-    }, 50)
+    }, 50);
 });
 
 app.listen(3000, () => {

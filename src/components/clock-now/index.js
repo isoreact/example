@@ -21,9 +21,9 @@ const Clock = () => (
     <StyledClock>
         <Connect
             context={ClockContext}
-            distinctBy={({hours, minutes, seconds}) => ({hours, minutes, seconds})} // this is optional
+            distinctBy={({isLoading, hours, minutes, seconds}) => ({isLoading, hours, minutes, seconds})} // this is optional
         >
-            {({hours, minutes, seconds}) => [
+            {({isLoading, hours, minutes, seconds}) => isLoading ? 'Loading...' : [
                 hours,
                 minutes,
                 seconds,

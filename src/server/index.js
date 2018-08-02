@@ -53,7 +53,7 @@ app.get('/api/v1/time', (req, res) => {
             minutes: now.getMinutes(),
             seconds: now.getSeconds(),
         });
-    }, 50);
+    }, 500);
 });
 
 app.listen(3000, () => {

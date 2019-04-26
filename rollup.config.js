@@ -3,6 +3,9 @@ import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
 import sourceMaps from 'rollup-plugin-sourcemaps';
+import {terser} from 'rollup-plugin-terser';
+
+const environment = process.env.NODE_ENV || 'development';
 
 export default [
     {
@@ -18,15 +21,15 @@ export default [
             commonjs({
                 include: 'node_modules/**',
                 namedExports: {
-                    'node_modules/react/index.js': ['Component', 'cloneElement', 'createElement'],
-                    'node_modules/react-is/index.js': ['isValidElementType'],
+                    'node_modules/react/index.js': ['Component', 'createElement', 'cloneElement', 'createContext'],
+                    'node_modules/react-is/index.js': ['isElement', 'isValidElementType', 'ForwardRef'],
                 }
             }),
             babel({
                 babelrc: false,
                 presets: [
                     [
-                        'env',
+                        '@babel/preset-env',
                         {
                             modules: false,
                             targets: {
@@ -34,28 +37,34 @@ export default [
                             },
                         },
                     ],
-                    'react',
+                    '@babel/preset-react',
                 ],
                 plugins: [
-                    'transform-object-rest-spread',
-                    'transform-class-properties',
-                    'external-helpers',
+                    '@babel/plugin-proposal-class-properties',
+                    '@babel/plugin-proposal-object-rest-spread',
                     [
-                        'styled-components',
+                        'babel-plugin-styled-components',
                         {
                             ssr: true,
                             displayName: true,
                             fileName: false,
                         },
                     ],
+                    environment === 'production' && 'babel-plugin-transform-react-remove-prop-types',
                 ].filter(Boolean),
                 exclude: 'node_modules/**',
             }),
             replace({
                 'process.browser': true.toString(),
                 'process.server': false.toString(),
-                'process.env.NODE_ENV': '"development"',
+                'process.env.NODE_ENV': `"${environment}"`,
             }),
-        ],
-    }
+            environment === 'production' && terser(),
+        ]
+            .filter(Boolean),
+        watch: {
+            include: 'src/**',
+            clearScreen: false,
+        },
+    },
 ];

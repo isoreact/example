@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Connect} from '@isoreact/core';
+import {Connect} from '@isoreact/bacon1';
+import isEqual from 'lodash/isEqual';
 
 import ClockContext from './context';
 
@@ -21,7 +22,7 @@ const Clock = () => (
     <StyledClock>
         <Connect
             context={ClockContext}
-            distinctBy={({isLoading, hours, minutes, seconds}) => ({isLoading, hours, minutes, seconds})} // this is optional
+            isEqual={isEqual} // this is optional
         >
             {({isLoading, hours, minutes, seconds}) => isLoading ? 'Loading...' : [
                 hours,

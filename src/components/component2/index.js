@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Connect} from '@isoreact/core';
+import {Connect} from '@isoreact/bacon1';
 
 import Component2Context from './context';
 

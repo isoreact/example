@@ -2,7 +2,7 @@
 import path from 'path';
 import express from 'express';
 import React from 'react';
-import {renderToHtml, StyledComponentsServerRenderer} from '@isoreact/core';
+import {renderToHtml, StyledComponentsServerRenderer} from '@isoreact/bacon1';
 
 import IsoClock from '../components/clock/iso';
 import IsoClockNow from '../components/clock-now/iso';

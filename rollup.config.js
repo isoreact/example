@@ -21,7 +21,7 @@ export default [
             commonjs({
                 include: 'node_modules/**',
                 namedExports: {
-                    'node_modules/react/index.js': ['Component', 'createElement', 'cloneElement', 'createContext'],
+                    'node_modules/react/index.js': ['Component', 'createElement', 'cloneElement', 'createContext', 'useContext', 'useLayoutEffect', 'useRef', 'useState'],
                     'node_modules/react-is/index.js': ['isElement', 'isValidElementType', 'ForwardRef'],
                 }
             }),
